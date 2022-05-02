@@ -10,8 +10,8 @@ from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm 
 
 from model import VNet
-from dataloader import LAHeart
-from dataloader import RandomCrop, RandomNoise, RandomRotFlip, ToTensor, CreateOnehotLabel
+from dataloaderc import LAHeart
+from dataloaderc import RandomCrop, RandomNoise, RandomRotFlip, ToTensor, CreateOnehotLabel
 
 # GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -76,7 +76,9 @@ for epoch in range(Max_epoch):
     sup_loss = 0.0
 
     for batch_idx, sample in tqdm(enumerate(trainloader)):
-        
+         
+        optimizer_a.zero_grad()
+        optimizer_b.zero_grad()
         images = sample["image"]
         labels = sample["label"]
         images = images.to(device)
@@ -104,8 +106,6 @@ for epoch in range(Max_epoch):
         sup_loss_seg_a += seg_loss_a.item()
         sup_loss_seg_b += seg_loss_b.item()
         sup_loss += loss.item()
-        optimizer_a.zero_grad()
-        optimizer_b.zero_grad()
     
     # Save Metrics
     sup_loss_cps = sup_loss_cps/len(trainset)
@@ -120,7 +120,9 @@ for epoch in range(Max_epoch):
     unsup_loss_cps = 0.0
 
     for batch_idx, sample in tqdm(enumerate(unlabelled_trainloader)):
-
+        
+        optimizer_a.zero_grad()
+        optimizer_b.zero_grad()
         images = sample["image"]
         labels = sample["label"]
         images = images.to(device)
@@ -142,8 +144,6 @@ for epoch in range(Max_epoch):
         optimizer_b.step()
 
         unsup_loss_cps += unsup_cps_loss.item()
-        optimizer_a.zero_grad()
-        optimizer_b.zero_grad()
 
     # Save Metrics
     unsup_loss_cps = unsup_loss_cps/len(unlabelled_trainset)
