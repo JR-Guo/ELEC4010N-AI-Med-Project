@@ -22,11 +22,11 @@ for i in range(9)
     temp = image[:,:,i*8]
     templa = label[:,:,i*8]
     im = Image.fromarray(np.int8(temp)).convert('L')
-        impath = "./image/" + str(i) + ".png"
-        im.save(impath)
-        
-        pr = Image.fromarray(np.int8(templa)).convert('L')
-        prpath = "./pred/" + str(i) + ".png"
-        pr.save(prpath)
+    impath = "./image/" + str(i) + ".png"
+    im.save(impath)
+
+    pr = Image.fromarray(np.int8(templa)).convert('L')
+    prpath = "./pred/" + str(i) + ".png"
+    pr.save(prpath)
 
 print("DONE")
