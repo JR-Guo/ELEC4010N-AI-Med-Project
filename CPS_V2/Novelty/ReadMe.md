@@ -1,8 +1,7 @@
 # Adaptive Loss Weight for Cross Pseudo Supervision Loss
 
 ## Key Concept:
-
-Logic Flow
+Main idea: if the model is less accurate, then cross train the models less (because they are not accurate enough themselves)
 
 for epoch in max_epoch:
   
@@ -15,4 +14,3 @@ for epoch in max_epoch:
   use only cps loss between model A and model B
   cps loss has a fixed weight (e.g. 0.001), and multiply this with the average dice score from the supervised training in this epoch
   
-Main idea: if the model is less accurate, then cross train the models less (because they are not accurate enough themselves)
