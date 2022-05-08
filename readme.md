@@ -14,6 +14,10 @@
    - Lovasz-Softmax Loss for Boundary-Smoothening
    - Adaptive CPS Loss Weight 
 
+The codes relevant to Cross Pseudo Supervision are inside the folder CPS_V2.
+The folder Novelties inside CPS_V2 contains the code for the Novelty No.2: Adaptive CPS Loss Weight
 
+The codes relevant to Mean Teach model are inside the folder MT. 
+(Novelty codes)
 
-
+Codes outside the folders are either relevant to Q1 - Fully Supervised Learning, or debugging code that can be ignored. 
